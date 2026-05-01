@@ -21,7 +21,7 @@ dashboard — with full observability at every stage.
                            │  │  • 5s auto-reconnect on disconnect        │  │
                            │  └──────────────┬───────────────┬────────────┘  │
                            │                 │ valid         │ bad tick      │
-                           │          ┌──────▼──────┐  ┌────▼──────────┐     │
+                           │          ┌──────▼──────┐  ┌─────▼─────────┐     │
                            │          │   trades    │  │  dead-letter  │     │
                            │          │  (Kafka)    │  │   (Kafka)     │     │
                            │          └──────┬──────┘  └────┬──────────┘     │
