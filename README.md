@@ -18,13 +18,13 @@ dashboard — with full observability at every stage.
   │  BTCUSDT @trade  │─────┼──►  • schema validation (Pydantic)           │  │
   │  ~5-10 msg/s     │     │  │  • dedup  (10k-entry bounded ring-buffer) │  │
   └──────────────────┘     │  │  • out-of-order detection                 │  │
-                           │  │  • 5s auto-reconnect on disconnect         │  │
+                           │  │  • 5s auto-reconnect on disconnect        │  │
                            │  └──────────────┬───────────────┬────────────┘  │
-                           │                 │ valid         │ bad tick       │
-                           │          ┌──────▼──────┐  ┌────▼──────────┐    │
-                           │          │   trades    │  │  dead-letter  │    │
-                           │          │  (Kafka)    │  │   (Kafka)     │    │
-                           │          └──────┬──────┘  └────┬──────────┘    │
+                           │                 │ valid         │ bad tick      │
+                           │          ┌──────▼──────┐  ┌────▼──────────┐     │
+                           │          │   trades    │  │  dead-letter  │     │
+                           │          │  (Kafka)    │  │   (Kafka)     │     │
+                           │          └──────┬──────┘  └────┬──────────┘     │
                            │                 │               │               │
                            │          ┌──────▼───────────────▼────────────┐  │
                            │          │           processor.py            │  │
@@ -32,25 +32,25 @@ dashboard — with full observability at every stage.
                            │          │  • anomaly detection (>2% move)   │  │
                            │          │  • idempotent DB writes           │  │
                            │          └──────────────┬─────────────────── ┘  │
-                           │                         │                        │
-                           │          ┌──────────────▼───────────────────┐    │
-                           │          │         TimescaleDB              │    │
-                           │          │  trades hypertable (by time)     │    │
-                           │          │  dead_letter_trades table        │    │
-                           │          └──────────────┬───────────────────┘    │
-                           │                         │                        │
-                           │          ┌──────────────▼───────────────────┐    │
-                           │          │          api/main.py             │    │
-                           │          │  GET /health  GET /stats         │    │
-                           │          │  (p99 latency via PERCENTILE_CONT│    │
-                           │          │   computed from DB in real-time) │    │
-                           │          └──────────────┬───────────────────┘    │
-                           │                         │                        │
-                           │          ┌──────────────▼───────────────────┐    │
-                           │          │       dashboard/app.py           │    │
-                           │          │  Streamlit — auto-refresh 2s     │    │
-                           │          │  price chart · VWAP · DLQ count  │    │
-                           │          └──────────────────────────────────┘    │
+                           │                         │                       │
+                           │          ┌──────────────▼───────────────────┐   │
+                           │          │         TimescaleDB              │   │
+                           │          │  trades hypertable (by time)     │   │
+                           │          │  dead_letter_trades table        │   │
+                           │          └──────────────┬───────────────────┘   │
+                           │                         │                       │
+                           │          ┌──────────────▼───────────────────┐   │
+                           │          │          api/main.py             │   │
+                           │          │  GET /health  GET /stats         │   │
+                           │          │  (p99 latency via PERCENTILE_CONT│   │
+                           │          │   computed from DB in real-time) │   │
+                           │          └──────────────┬───────────────────┘   │
+                           │                         │                       │
+                           │          ┌──────────────▼───────────────────┐   │
+                           │          │       dashboard/app.py           │   │
+                           │          │  Streamlit — auto-refresh 2s     │   │
+                           │          │  price chart · VWAP · DLQ count  │   │
+                           │          └──────────────────────────────────┘   │
                            └─────────────────────────────────────────────────┘
 ```
 
