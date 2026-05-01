@@ -1,0 +1,4 @@
+pytest
+pydantic==2.6.3
+websockets==12.0
+aiokafka==0.10.0

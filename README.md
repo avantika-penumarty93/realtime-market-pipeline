@@ -150,6 +150,14 @@ realtime-market-pipeline/
 
 ---
 
+## Running Tests
+
+```bash
+pip install -r requirements-test.txt && pytest tests/
+```
+
+---
+
 ## How to Run
 
 **Prerequisites:** Docker + Docker Compose v2, internet access for Binance WSS.
